@@ -1,0 +1,70 @@
+# Exercício das Queries
+
+1.Quantos contratos estão na base de dados;
+
+db.contracts.countDocuments()
+
+2.Quantos contratos foram realizados pela Universidade do Minho?
+
+db.contracts.find({NomeInstituicao:"Universidade do Minho"}).count()
+
+
+3.Qual a lista das áreas das pessoas contratadas (ordenada alfabeticamente e sem repetições)? (AreaCNAEF)
+
+
+db.contracts.aggregate([{$group:{_id:"$AreaCNAEF"}},{$sort:{_id:1}}])
+
+
+4.Qual a distribuição por ano dos contratos? (quantos contratos em cada ano)
+
+db.contracts.aggregate([{ 
+  $addFields: {
+    ano: {
+      $arrayElemAt: [ { $split: ["$DataInicioContrato", "/"] }, 2]
+    }
+  }
+  },
+  {
+    $group: {
+      _id: "$ano",
+      count: {$sum: 1}
+    }
+  }
+])
+
+
+5.Qual a distribuição dos contratos por instituição?
+
+db.contracts.aggregate([{$group:{_id:"$NomeInstituicao",count:{$sum:1}}}])
+
+
+# Persistência dos dados e Setup da Base de dados:
+
+O ficheiro fornecido, necessitou de ser modificado com recurso ao script python addIds.py, para que fossem adicionados
+os IDs de cada contrato. O id associado é apenas um contador, representando a posição do documento no ficheiro original.
+
+O ficheiro criado (emprego-cientifico2.json) foi importado para o mongoDb com recurso ao comando:
+
+  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2
+
+Foi necessária a introdução da flag --jsonArray, para que o mongoDB reconhecesse os documentos no interior do array principal
+
+
+Instruções de Execução:
+
+Para executar as API criadas, o utilizador deverá começar por importar os dados para a sua instalação do mongoDB com o comando:
+
+  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2
+
+
+Depois apenas é necessário em cada uma das pastas ex1/ e ex2/, executar os comandos:
+
+Apenas uma vez para instalar todos os modulos necessários:
+ 
+  npm install
+
+
+E para inciar as aplicações:
+
+  npm start
+

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  table.w3-table
+      tr
+        th ID 
+        th DataInicioContrato 
+        th DataFimContrato
+        th NomeInstituicao
+        th AreasInvestigacao
+      each contract in contracts
+        tr.w3-hover-light-blue
+          td #[a(href="/" + contract.id) #{contract.id}]
+          td #{contract.DataInicioContrato}
+          td #{contract.DataFimContrato}
+          td #[a(href="/inst/" + contract.NomeInstituicao) #{contract.NomeInstituicao}]
+          td #{contract.AreasInvestigacao}
+  footer 
+    a.btn(href="/") Back to Index
