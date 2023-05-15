@@ -1,18 +1,23 @@
 extends layout
 
 block content
+  h1 Contratos celebrados por: #[strong #{contracts[0].NomeInstituicao}]
+  h3 #[strong NIPC] #{contracts[0].NIPCInstituicao}
   table.w3-table
-      tr
+      tr 
         th ID 
-        th DataInicioContrato 
-        th DataFimContrato
-        th NomeInstituicao
-        th AreasInvestigacao
+        th Data Inicio Contrato 
+        th Data Fim Contrato
+        th Nome Instituicao
+        th Areas Investigacao
       each contract in contracts
         tr.w3-hover-light-blue
           td #[a(href="/" + contract.id) #{contract.id}]
           td #{contract.DataInicioContrato}
-          td #{contract.DataFimContrato}
+          if contract.DataFimContrato
+            td #{contract.DataFimContrato}
+          else 
+            td Não definida
           td #[a(href="/inst/" + contract.NomeInstituicao) #{contract.NomeInstituicao}]
           td #{contract.AreasInvestigacao}
   footer 

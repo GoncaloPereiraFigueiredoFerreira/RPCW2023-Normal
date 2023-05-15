@@ -45,7 +45,7 @@ os IDs de cada contrato. O id associado é apenas um contador, representando a p
 
 O ficheiro criado (emprego-cientifico2.json) foi importado para o mongoDb com recurso ao comando:
 
-  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2
+  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2.json
 
 Foi necessária a introdução da flag --jsonArray, para que o mongoDB reconhecesse os documentos no interior do array principal
 
@@ -54,7 +54,7 @@ Instruções de Execução:
 
 Para executar as API criadas, o utilizador deverá começar por importar os dados para a sua instalação do mongoDB com o comando:
 
-  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2
+  mongoimport -d scienceJobs -c contracts --jsonArray emprego-cientifico2.json
 
 
 Depois apenas é necessário em cada uma das pastas ex1/ e ex2/, executar os comandos:
@@ -68,3 +68,4 @@ E para inciar as aplicações:
 
   npm start
 
+Nota: Deverá começar primeiro a API de dados e apenas depois a Interface Web (dado que a interface web depende da API)

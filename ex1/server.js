@@ -72,7 +72,10 @@ app.post("/contracts",(req,res,next)=>{
 
 app.delete("/contracts/:id",(req,res,next)=>{
   Contracts.deleteContract(req.params.id).then((result)=>{
-    res.status(200).jsonp(result).end()
+    if (result.deletedCount > 0)
+      res.status(200).jsonp({deleted:true}).end()
+    else
+      res.status(200).jsonp({deleted:false}).end()
   }).catch(err=>{next(err)})
 })
 

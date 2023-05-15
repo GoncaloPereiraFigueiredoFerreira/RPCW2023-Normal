@@ -6,14 +6,17 @@ block content
   table.w3-table
       tr
         th ID 
-        th DataInicioContrato 
-        th DataFimContrato
-        th NomeInstituicao
-        th AreasInvestigacao
+        th Data Inicio Contrato 
+        th Data Fim Contrato
+        th Nome Instituicao
+        th Areas Investigacao
       each contract in contracts
         tr.w3-hover-light-blue
           td #[a(href="/" + contract.id) #{contract.id}]
-          td #{contract.DataInicioContrato}
-          td #{contract.DataFimContrato}
+          td #{contract.DataInicioContrato} 
+          if contract.DataFimContrato
+            td #{contract.DataFimContrato}
+          else 
+            td Não definida
           td #[a(href="/inst/" + contract.NIPCInstituicao) #{contract.NomeInstituicao}]
           td #{contract.AreasInvestigacao}

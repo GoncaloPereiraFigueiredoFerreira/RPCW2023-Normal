@@ -20,3 +20,4 @@ f2.write(json.dumps(data))
 
 # Closing file
 f.close()
+f2.close()
